@@ -1,0 +1,14 @@
+#set($JavaMapperName = ${package.ModuleName} + "Mapper")
+package com.kuo.huahua.mapper;
+
+import com.kuo.huahua.entity.${package.ModuleName};
+import ${superMapperClassPackage};
+
+/**
+ * @author ${author}
+ * @date ${cfg.dateTime}
+ * @describe $!{table.comment}Mapper类
+ */
+public interface ${JavaMapperName} extends ${superMapperClass}<${package.ModuleName}> {
+
+}

@@ -1,0 +1,28 @@
+#set($JavaServiceImplName = ${package.ModuleName} + "ServiceImpl")
+#set($JavaMapperName = ${package.ModuleName} + "Mapper")
+#set($JavaServiceName = "I" + ${package.ModuleName} + "Service")
+#set($ServiceParam = $JavaMapperName.substring(0, 1).toLowerCase() + $JavaMapperName.substring(1))
+package com.kuo.huahua.service.impl;
+
+import com.kuo.huahua.utils.ServiceException;
+import com.kuo.huahua.entity.${package.ModuleName};
+import com.kuo.huahua.mapper.${JavaMapperName};
+import com.kuo.huahua.service.${JavaServiceName};
+import ${superServiceImplClassPackage};
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+
+/**
+ * @author ${author}
+ * @date ${cfg.dateTime}
+ * @describe $!{table.comment}服务实现类
+ */
+@Service
+@Transactional(rollbackFor = ServiceException.class)
+public class ${JavaServiceImplName} extends ${superServiceImplClass}<${JavaMapperName}, ${package.ModuleName}> implements ${JavaServiceName} {
+
+    @Resource
+    private ${JavaMapperName} ${ServiceParam};
+}

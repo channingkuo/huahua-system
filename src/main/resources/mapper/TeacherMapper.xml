@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kuo.huahua.mapper.TeacherMapper">
+    <resultMap id="BaseResultMap" type="com.kuo.huahua.entity.Teacher">
+        <id column="cea_teacher_id" property="ceaTeacherId" />
+        <result column="cea_teacher_name" property="ceaTeacherName" />
+        <result column="cea_teacher_account" property="ceaTeacherAccount" />
+        <result column="cea_teacher_password" property="ceaTeacherPassword" />
+        <result column="cea_teacher_kind" property="ceaTeacherKind" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        cea_teacher_id, cea_teacher_name, cea_teacher_account, cea_teacher_password, cea_teacher_kind
+    </sql>
+
+</mapper>

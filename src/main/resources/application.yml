@@ -1,0 +1,37 @@
+server:
+  port: 1101
+
+spring:
+  application:
+    name: huahua-system
+  datasource:
+    url: jdbc:mysql://${db-ip}:3306/cea?autoRec&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: Y5wroot
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  profiles:
+    active: docker
+
+db-ip: localhost
+
+logging:
+  level:
+    com.kuo.huahua.mapper: debug
+
+---
+# Docker
+spring:
+  config:
+    activate:
+      on-profile: docker
+
+db-ip: channingkuo.synology.me
+
+---
+# Docker
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+db-ip: localhost

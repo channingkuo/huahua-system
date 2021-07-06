@@ -1,0 +1,14 @@
+#set($JavaServiceName = "I" + ${package.ModuleName} + "Service")
+package com.kuo.huahua.service;
+
+import com.kuo.huahua.entity.${package.ModuleName};
+import ${superServiceClassPackage};
+
+/**
+ * @author ${author}
+ * @date ${cfg.dateTime}
+ * @describe $!{table.comment}Service类
+ */
+public interface ${JavaServiceName} extends ${superServiceClass}<${package.ModuleName}> {
+
+}

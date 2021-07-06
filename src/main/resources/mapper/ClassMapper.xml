@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kuo.huahua.mapper.ClassMapper">
+    <resultMap id="BaseResultMap" type="com.kuo.huahua.entity.Class">
+        <id column="cea_class_id" property="ceaClassId" />
+        <result column="cea_class_name" property="ceaClassName" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        cea_class_id, cea_class_name
+    </sql>
+
+</mapper>

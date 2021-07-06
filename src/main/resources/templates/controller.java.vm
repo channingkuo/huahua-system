@@ -1,0 +1,21 @@
+#set($JavaControllerName = ${package.ModuleName} + "Controller")
+#set($JavaServiceName = "I" + ${package.ModuleName} + "Service")
+#set($JavaServiceParam = ${package.ModuleName.substring(0, 1).toLowerCase()} + ${package.ModuleName.substring(1)} + "Service")
+package com.kuo.huahua.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+import com.kuo.huahua.service.${JavaServiceName};
+
+import javax.annotation.Resource;
+
+/**
+ * @author ${author}
+ * @date ${cfg.dateTime}
+ * @describe $!{table.comment}
+ */
+@RestController
+public class ${JavaControllerName} {
+
+    @Resource
+    private ${JavaServiceName} ${JavaServiceParam};
+}

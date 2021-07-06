@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kuo.huahua.mapper.TestScoreMapper">
+    <resultMap id="BaseResultMap" type="com.kuo.huahua.entity.TestScore">
+        <id column="cea_test_score_id" property="ceaTestScoreId" />
+        <result column="cea_term" property="ceaTerm" />
+        <result column="cea_student_id" property="ceaStudentId" />
+        <result column="cea_kind" property="ceaKind" />
+        <result column="cea_test_title" property="ceaTestTitle" />
+        <result column="cea_score" property="ceaScore" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        cea_test_score_id, cea_term, cea_student_id, cea_kind, cea_test_title, cea_score
+    </sql>
+
+    <select id="getScoreList" resultType="java.util.HashMap" parameterType="com.kuo.huahua.dto.TeacherTermDto">
+        <bind name="classNameQ" value="'%' + className + '%'"/>
+        <bind name="studentNameQ" value="'%' + studentName + '%'"/>
+        SELECT A.cea_term,
+          A.cea_class_name,
+          B.cea_student_name,
+          A.cea_kind,
+          GROUP_CONCAT(A.cea_test_title) AS test_name_sets,
+          GROUP_CONCAT(A.cea_score) AS score_sets
+        FROM cea_test_score A
+          LEFT JOIN cea_teacher_term B ON A.cea_student_id = B.cea_student_id AND A.cea_term = B.cea_term
+        WHERE B.cea_student_status = 1
+        <if test="null != className and '' != className and 'null' != className">
+            AND A.cea_class_name LIKE #{classNameQ}
+        </if>
+        <if test="null != studentName and '' != studentName">
+            AND B.cea_student_name LIKE #{studentNameQ}
+        </if>
+        GROUP BY A.cea_term, A.cea_class_name, B.cea_student_name, A.cea_kind
+    </select>
+</mapper>
