@@ -51,4 +51,34 @@ public class TestScoreController {
             return ResultGenerator.genFailResult(e.getMessage());
         }
     }
+
+    @RequestMapping(value = "/chart/overview/{teacherId}", method = RequestMethod.POST)
+    public Result overViewChart(@RequestBody UploadScoreDto payload, @PathVariable Long teacherId) {
+        try {
+            JSONObject result = testScoreService.overViewChart(payload, teacherId);
+            return ResultGenerator.genSuccessResult(result);
+        } catch (Exception e) {
+            return ResultGenerator.genFailResult(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/chart/single/test/{teacherId}", method = RequestMethod.POST)
+    public Result singleTestChart(@RequestBody UploadScoreDto payload, @PathVariable Long teacherId) {
+        try {
+            JSONObject result = testScoreService.singleTestChart(payload, teacherId);
+            return ResultGenerator.genSuccessResult(result);
+        } catch (Exception e) {
+            return ResultGenerator.genFailResult(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/chart/single/student/test/{teacherId}", method = RequestMethod.POST)
+    public Result singleStudentTestChart(@RequestBody UploadScoreDto payload, @PathVariable Long teacherId) {
+        try {
+            JSONObject result = testScoreService.singleStudentTestChart(payload, teacherId);
+            return ResultGenerator.genSuccessResult(result);
+        } catch (Exception e) {
+            return ResultGenerator.genFailResult(e.getMessage());
+        }
+    }
 }

@@ -20,4 +20,19 @@ public interface ITestScoreService extends IService<TestScore> {
 	List<Map<String, Object>> getList(JSONObject payload) throws ServiceException;
 
 	void saveScore(JSONObject payload) throws ServiceException;
+
+	/**
+	 * 总览图表
+	 */
+	JSONObject overViewChart(UploadScoreDto payload, Long teacherId) throws ServiceException;
+
+	/**
+	 * 单科成绩图表
+	 */
+	JSONObject singleTestChart(UploadScoreDto payload, Long teacherId) throws ServiceException;
+
+	/**
+	 * 单个学生所有考试图表
+	 */
+	JSONObject singleStudentTestChart(UploadScoreDto payload, Long teacherId) throws ServiceException;
 }

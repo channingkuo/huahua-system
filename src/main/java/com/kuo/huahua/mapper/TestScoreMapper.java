@@ -16,4 +16,10 @@ import java.util.Map;
 public interface TestScoreMapper extends BaseMapper<TestScore> {
 
 	List<Map<String, Object>> getScoreList(TeacherTermDto payload);
+
+	List<Map<String, String>> getTestNameList(UploadScoreDto payload);
+
+	List<Map<String, Object>> getTestScoreList(UploadScoreDto payload);
+
+	List<Map<String, Object>> getStudentTestScoreList(UploadScoreDto payload);
 }
