@@ -1,14 +1,17 @@
 package com.kuo.huahua.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Lists;
 import com.kuo.huahua.dto.TeacherTermDto;
 import com.kuo.huahua.dto.UploadStudentDto;
 import com.kuo.huahua.entity.Class;
 import com.kuo.huahua.entity.Student;
+import com.kuo.huahua.entity.TeacherTerm;
 import com.kuo.huahua.mapper.StudentMapper;
 import com.kuo.huahua.service.IClassService;
 import com.kuo.huahua.service.IStudentService;
+import com.kuo.huahua.service.ITeacherTermService;
 import com.kuo.huahua.utils.ServiceException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -32,6 +35,9 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
 
     @Resource
     private IClassService classService;
+
+    @Resource
+    private ITeacherTermService teacherTermService;
 
     @Override
     public List<Map<String, Object>> getStudentList(String className, String studentName) throws ServiceException {
@@ -98,6 +104,17 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
                 throw new ServiceException("找不到对应的学生！");
             }
             this.updateById(student);
+
+            QueryWrapper<TeacherTerm> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("cea_class_id", student.getCeaClassId());
+            queryWrapper.eq("cea_student_id", student.getCeaStudentId());
+            List<TeacherTerm> teacherTermList = teacherTermService.list(queryWrapper);
+
+            teacherTermList.forEach(teacherTerm -> {
+                teacherTerm.setCeaStudentName(student.getCeaStudentName());
+                teacherTerm.setCeaStudentGender(student.getCeaStudentGender());
+            });
+            teacherTermService.updateBatchById(teacherTermList);
         }
     }
 }

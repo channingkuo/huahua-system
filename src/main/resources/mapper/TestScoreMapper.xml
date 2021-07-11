@@ -23,7 +23,8 @@
           B.cea_student_name,
           A.cea_kind,
           GROUP_CONCAT(A.cea_test_title) AS test_name_sets,
-          GROUP_CONCAT(A.cea_score) AS score_sets
+          GROUP_CONCAT(A.cea_score) AS score_sets,
+          AVG(A.cea_score) AS avg_score
         FROM cea_test_score A
           LEFT JOIN cea_teacher_term B ON A.cea_student_id = B.cea_student_id AND A.cea_term = B.cea_term
         WHERE B.cea_student_status = 1
