@@ -59,15 +59,19 @@ public class TestScoreServiceImpl extends ServiceImpl<TestScoreMapper, TestScore
             classQueryWrapper.eq("cea_class_name", uploadScoreDto.getClassName());
             Class classEntity = classService.getOne(classQueryWrapper);
 
-            QueryWrapper<TeacherTerm> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("cea_student_name", uploadScoreDto.getName());
-            queryWrapper.eq("cea_term", uploadScoreDto.getTerm());
-            queryWrapper.eq("cea_class_id", classEntity.getCeaClassId());
-            TeacherTerm teacherTerm = teacherTermService.getOne(queryWrapper);
+            if (null != classEntity) {
+                QueryWrapper<TeacherTerm> queryWrapper = new QueryWrapper<>();
+                queryWrapper.eq("cea_student_name", uploadScoreDto.getName());
+                queryWrapper.eq("cea_term", uploadScoreDto.getTerm());
+                queryWrapper.eq("cea_class_id", classEntity.getCeaClassId());
+                TeacherTerm teacherTerm = teacherTermService.getOne(queryWrapper);
 
-            testScore.setCeaStudentId(teacherTerm.getCeaStudentId());
+                if (null != teacherTerm) {
+                    testScore.setCeaStudentId(teacherTerm.getCeaStudentId());
 
-            testScoreList.add(testScore);
+                    testScoreList.add(testScore);
+                }
+            }
         });
 
         this.saveBatch(testScoreList);
