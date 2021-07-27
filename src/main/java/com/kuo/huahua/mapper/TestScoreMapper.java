@@ -22,4 +22,6 @@ public interface TestScoreMapper extends BaseMapper<TestScore> {
 	List<Map<String, Object>> getTestScoreList(UploadScoreDto payload);
 
 	List<Map<String, Object>> getStudentTestScoreList(UploadScoreDto payload);
+
+	List<Map<String, Object>> getTestsAvgStudentList(UploadScoreDto payload);
 }

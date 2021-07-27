@@ -81,4 +81,14 @@ public class TestScoreController {
             return ResultGenerator.genFailResult(e.getMessage());
         }
     }
+
+    @RequestMapping(value = "/chart/tests/average/{teacherId}", method = RequestMethod.POST)
+    public Result testAverageChart(@RequestBody UploadScoreDto payload, @PathVariable Long teacherId) {
+        try {
+            JSONObject result = testScoreService.testAverageChart(payload, teacherId);
+            return ResultGenerator.genSuccessResult(result);
+        } catch (Exception e) {
+            return ResultGenerator.genFailResult(e.getMessage());
+        }
+    }
 }

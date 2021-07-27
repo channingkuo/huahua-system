@@ -35,4 +35,9 @@ public interface ITestScoreService extends IService<TestScore> {
 	 * 单个学生所有考试图表
 	 */
 	JSONObject singleStudentTestChart(UploadScoreDto payload, Long teacherId) throws ServiceException;
+
+	/**
+	 * 多次测试平均分学生图标
+	 */
+	JSONObject testAverageChart(UploadScoreDto payload, Long teacherId) throws ServiceException;
 }

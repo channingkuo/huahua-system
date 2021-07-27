@@ -22,4 +22,6 @@ public class UploadScoreDto {
 	private String testName;
 
 	private Float score;
+
+	private String[] testNames;
 }

@@ -314,4 +314,39 @@ public class TestScoreServiceImpl extends ServiceImpl<TestScoreMapper, TestScore
 
         return result;
     }
+
+    @Override
+    public JSONObject testAverageChart(UploadScoreDto payload, Long teacherId) throws ServiceException {
+        JSONObject result = new JSONObject();
+        if (null == teacherId) {
+            throw new ServiceException("老师Id丢失！");
+        }
+        if (StringUtils.isBlank(payload.getTerm())) {
+            throw new ServiceException("学期不能为空！");
+        }
+        if (StringUtils.isBlank(payload.getClassName())) {
+            throw new ServiceException("班级不能为空！");
+        }
+        if (StringUtils.isBlank(payload.getKind())) {
+            throw new ServiceException("学科不能为空！");
+        }
+        if (payload.getTestNames().length <= 0) {
+            throw new ServiceException("只要选择一次测试！");
+        }
+
+        List<String> studentList = Lists.newArrayList();
+        List<Float> avgList = Lists.newArrayList();
+
+        List<Map<String, Object>> testsAvgList = testScoreMapper.getTestsAvgStudentList(payload);
+        for (Map<String, Object> map: testsAvgList) {
+            studentList.add(map.get("cea_student_name").toString());
+
+            avgList.add(Float.valueOf(map.get("avg_score").toString()));
+        }
+
+        result.put("studentList", studentList);
+        result.put("avgList", avgList);
+
+        return result;
+    }
 }

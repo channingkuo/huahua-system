@@ -91,4 +91,21 @@
             AND B.cea_student_name = #{name}
         </if>
     </select>
+
+    <select id="getTestsAvgStudentList" resultType="java.util.HashMap" parameterType="com.kuo.huahua.dto.UploadScoreDto">
+        SELECT B.cea_student_name, AVG(A.cea_score) avg_score
+        FROM cea_test_score A
+        LEFT JOIN cea_teacher_term B ON A.cea_student_id = B.cea_student_id
+        AND A.cea_term = B.cea_term
+        WHERE B.cea_student_status = 1
+        AND A.cea_term = #{term}
+        AND A.cea_class_name = #{className}
+        AND A.cea_kind = #{kind}
+        AND A.cea_test_title IN
+        <foreach item="item" index="index" collection="testNames" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        GROUP BY B.cea_student_name
+        ORDER BY B.cea_student_name
+    </select>
 </mapper>
