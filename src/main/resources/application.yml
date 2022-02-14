@@ -6,8 +6,8 @@ spring:
     name: huahua-system
   datasource:
     url: jdbc:mysql://${db-ip}:3306/cea?autoRec&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
-    username: root
-    password: Y5wroot
+    username: ****
+    password: ****
     driver-class-name: com.mysql.cj.jdbc.Driver
   profiles:
     active: docker
@@ -25,7 +25,7 @@ spring:
     activate:
       on-profile: docker
 
-db-ip: channingkuo.synology.me
+db-ip: *******
 
 ---
 # Docker
