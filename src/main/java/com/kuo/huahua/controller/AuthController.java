@@ -34,9 +34,4 @@ public class AuthController {
 			return ResultGenerator.genFailResult(e.getMessage());
 		}
 	}
-
-	@RequestMapping(value = "/check", method = RequestMethod.POST)
-	public String checkToken() {
-		return "Token valid";
-	}
 }
